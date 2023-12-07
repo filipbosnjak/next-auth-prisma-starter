@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+### Docs for auth
+
+Libs: [next-auth](https://next-auth.js.org/) and bcryptjs
+
+In app dir we created auth/[...nextauth] dir
+It contains our providers all connected in options configuration file. Then we expose it in the route.ts file.
+On the client we need SessionProvider to wrap our app and useSession hook to get session data.
+We create AuthProvider wrapper for our SessionProvider and. We wrap the whole app in layout.tsx file.
+Sign in with signIn("provider", {options}) function. Sign out with signOut() function.
+Get session data on the server with await getServerSession(options);
+
+Other libs used:
+- [react-hook-form](https://react-hook-form.com/) for forms
+- [shadcn](https://ui.shadcn.com/) for UI components
