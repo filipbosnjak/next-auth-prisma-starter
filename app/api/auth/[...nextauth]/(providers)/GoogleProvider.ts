@@ -1,7 +1,8 @@
-import GoogleProvider from "next-auth/providers/google";
+import GoogleProvider, { GoogleProfile } from "next-auth/providers/google";
+import prisma from "@/prisma/prisma";
 
 export const googleProvider = GoogleProvider({
-  async profile(profile) {
+  async profile(profile: GoogleProfile) {
     // Connect to the database
     // Check if a user exists in the database
     // If so, return the user object
@@ -10,11 +11,37 @@ export const googleProvider = GoogleProvider({
 
     // Here we get data from Google and we can do whatever we want with it
 
-    return {
-      id: profile.id.toString(),
-      name: profile.name || profile.login,
-      email: profile.email,
-      image: profile.avatar_url,
+    console.log(profile);
+
+    const foundUser = await prisma.user.findUnique({
+      where: {
+        email: profile?.email || "",
+      },
+    });
+
+    if (foundUser) {
+      return {
+        id: foundUser.id.toString(),
+        name: foundUser.username,
+        email: foundUser.email,
+        image: profile.picture,
+      };
+    } else {
+      const newUser = await prisma.user.create({
+        data: {
+          email: profile?.email || "",
+          username: profile?.name || profile?.login || "",
+          role: "USER",
+          domain: "google",
+        },
+      });
+
+      return {
+        id: newUser.id.toString(),
+        name: newUser.username,
+        email: newUser.email,
+        image: profile.picture,
+      };
     }
   },
   clientId: process.env.GOOGLE_CLIENT_ID || "",

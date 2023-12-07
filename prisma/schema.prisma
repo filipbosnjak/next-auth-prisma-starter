@@ -19,8 +19,11 @@ model Post {
 
 model User {
   id            String       @default(cuid()) @id
-  name          String?
+  username      String?
   email         String?   @unique
+  password      String?
+  domain        String?
+  role          String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   posts         Post[]

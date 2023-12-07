@@ -1,5 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-
+import prisma from "@/prisma/prisma";
+import bcrypt from "bcrypt";
 
 export const credentialsProvider = CredentialsProvider({
   type: "credentials",
@@ -12,11 +13,28 @@ export const credentialsProvider = CredentialsProvider({
   //@ts-ignore
   async authorize(credentials, request) {
     try {
-      // Connect to the database
-      // Check if a user exists in the database
-      // If so, compare the password from the form with the stored password
-      // If the password matches, return the user object
-      // If the password does not match, return null
+      const foundUser = await prisma.user.findUnique({
+        where: {
+          email: credentials?.email,
+        },
+      });
+
+      if (foundUser) {
+        // compare the password from the form with the stored password
+        const passwordsMatch = await bcrypt.compare(
+          credentials?.password || "",
+          foundUser?.password || "",
+        );
+        if (!passwordsMatch) {
+          return { error: "Incorrect password" };
+        }
+        return {
+          email: foundUser.email,
+          name: foundUser.username,
+        };
+      } else {
+        return { error: "No user found" };
+      }
     } catch (error) {
       console.log("error: ", error);
     }

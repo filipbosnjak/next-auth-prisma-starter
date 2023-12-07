@@ -21,17 +21,13 @@ export type LoginInput = {
   password: string;
 };
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
-  providers: Record<
+  /*  providers: Record<
     LiteralUnion<BuiltInProviderType, string>,
     ClientSafeProvider
-  > | null;
+  > | null;*/
 }
 
-export function LoginAuthForm({
-  className,
-  providers,
-  ...props
-}: UserAuthFormProps) {
+export function LoginAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const {

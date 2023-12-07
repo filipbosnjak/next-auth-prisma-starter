@@ -13,12 +13,6 @@ export const metadata: Metadata = {
 };
 
 export default async function AuthenticationPage() {
-  const providers = await getProviders();
-
-  const users = await prisma.user.findMany({});
-
-  console.log(users);
-
   return (
     <>
       <div className="container relative h-screen  flex-col items-center justify-center grid lg:max-w-none lg:px-0">
@@ -39,7 +33,7 @@ export default async function AuthenticationPage() {
                 Enter your email and password below to sing in
               </p>
             </div>
-            <LoginAuthForm providers={providers} />
+            <LoginAuthForm />
             <p className="px-8 text-center text-sm text-muted-foreground">
               By clicking continue, you agree to our{" "}
               <Link
