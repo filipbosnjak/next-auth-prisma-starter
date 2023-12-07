@@ -1,0 +1,14 @@
+vercel link
+vercel env pull .env.local - pull env variables from vercel
+
+PRISMA
+
+npm install prisma -D
+create prisma folder
+create schema.prisma file in prisma folder
+
+run npx prisma db push that will create the tables from the schema.prisma file
+
+npx prisma generate - generate the prisma client that will be used to interact with the database
+
+import { PrismaClient } from "@prisma/client"; - import the prisma client the right way

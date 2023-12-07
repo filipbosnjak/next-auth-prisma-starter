@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { LoginAuthForm } from "@/app/login/components/LoginAuthForm";
 import { getProviders } from "next-auth/react";
+import prisma from "@/prisma/prisma";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -13,6 +14,10 @@ export const metadata: Metadata = {
 
 export default async function AuthenticationPage() {
   const providers = await getProviders();
+
+  const users = await prisma.user.findMany({});
+
+  console.log(users);
 
   return (
     <>
