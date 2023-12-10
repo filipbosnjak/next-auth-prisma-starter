@@ -1,9 +1,17 @@
 import React from "react";
 import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
-import { options } from "../api/auth/[...nextauth]/options";
+import dynamic from "next/dynamic";
 
 export type PageProps = {};
+
+const AblyAuthClientComponent = dynamic(
+  () => import("./AblyAuthClientComponent"),
+  {
+    ssr: false,
+  },
+);
 
 const Page = async (props: PageProps) => {
   const session = await getServerSession(options);
@@ -11,9 +19,12 @@ const Page = async (props: PageProps) => {
   if (!session) {
     redirect("/api/auth/signin?callbackUrl=/hello");
   }
-
-  // @ts-ignore
-  return <>hello {session.user.name}</>;
+  return (
+    <>
+      ablyauth
+      <AblyAuthClientComponent />
+    </>
+  );
 };
 
 export default Page;
