@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { authUser } from "@/(components)/utils/ServerUtils";
 import dynamic from "next/dynamic";
+import prisma from "@/prisma/prisma";
+import { DBMessage } from "@/app/api/get-messages/route";
 
 export type PageProps = {};
 
@@ -15,17 +17,24 @@ const Messages = dynamic(() => import("./components/Messages"), {
 });
 
 const Page = async (props: PageProps) => {
-  const session1 = await authUser();
-  console.log("session1: ", session1);
+  await authUser();
   const session: ServerSession = (await authUser()) as ServerSession;
-  console.log("session: ", session);
+
+  const messages: DBMessage[] = await prisma.message.findMany({
+    where: {
+      to: {
+        email: session.user.email,
+      },
+    },
+  });
+
   return (
     <>
       messages
       <Button>
         <Link href={"/messages/newmessage"}>New message</Link>
       </Button>
-      <Messages user={session.user.email} />
+      <Messages user={session.user.email} messages={messages} />
     </>
   );
 };

@@ -5,9 +5,11 @@ import { AblyProvider, useChannel } from "ably/react";
 import * as Ably from "ably";
 import { LogEntry } from "@/(components)/Logger";
 import MessagesList from "@/app/messages/components/MessagesList";
+import { DBMessage } from "@/app/api/get-messages/route";
 
 export type MessagesProps = {
   user: string;
+  messages: DBMessage[];
 };
 
 const client = new Ably.Realtime.Promise({
@@ -15,7 +17,7 @@ const client = new Ably.Realtime.Promise({
   authMethod: "POST",
 });
 
-const Messages = ({ user }: MessagesProps) => {
+const Messages = ({ user, messages }: MessagesProps) => {
   // Sub to user channel
 
   console.log("user: ", user);
@@ -23,6 +25,18 @@ const Messages = ({ user }: MessagesProps) => {
     <>
       <AblyProvider client={client}>
         <MessagesList user={user} />
+        {messages.map((message) => {
+          return (
+            <ul>
+              <li key={message.id}>
+                <span>{message.subject}</span>
+                <span>{message.text}</span>
+                <span>{message.fromId}</span>
+                <span>{message.toId}</span>
+              </li>
+            </ul>
+          );
+        })}
       </AblyProvider>
     </>
   );

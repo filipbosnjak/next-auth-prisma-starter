@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { NewMessageInput } from "@/app/messages/newmessage/page";
+import { Message } from "@/app/api/send-message/route";
 
 export type NewMessageProps = {
   user: string;
@@ -44,6 +45,20 @@ const NewMessage = ({ user }: NewMessageProps) => {
     console.log(receiver, text, subject);
     await newMessageChannel.channel.publish("new-message", {
       text: `${subject} - ${text} @ ${new Date().toISOString()} FROM ${user}`,
+    });
+
+    const message: Message = {
+      from: user,
+      to: receiver,
+      subject: subject,
+      text: text,
+    };
+    await fetch("/api/send-message", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(message),
     });
   };
 
