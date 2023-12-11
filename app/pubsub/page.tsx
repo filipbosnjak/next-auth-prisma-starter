@@ -4,13 +4,21 @@
  */
 import React from "react";
 import dynamic from "next/dynamic";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 
 const PubSubClient = dynamic(() => import("./pubsub-client"), {
   ssr: false,
 });
 
-const PubSub = () => {
+const PubSub = async () => {
   const pageId = "PubSubChannels";
+  const session = await getServerSession(options);
+
+  if (!session) {
+    redirect("/api/auth/signin?callbackUrl=/hello");
+  }
 
   return (
     <>

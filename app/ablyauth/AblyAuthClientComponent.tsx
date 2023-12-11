@@ -3,7 +3,7 @@
 import React, { MouseEventHandler, useState } from "react";
 import Ably from "ably/promises";
 import { AblyProvider, useAbly, useConnectionStateListener } from "ably/react";
-import Logger, { LogEntry } from "@/(components)/logger";
+import Logger, { LogEntry } from "@/(components)/Logger";
 
 export type AblyAuthClientComponentProps = {};
 

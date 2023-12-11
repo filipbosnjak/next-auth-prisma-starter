@@ -3,7 +3,7 @@
 import * as Ably from "ably";
 import { AblyProvider, useChannel } from "ably/react";
 import { MouseEventHandler, MouseEvent, useState } from "react";
-import Logger, { LogEntry } from "@/(components)/logger";
+import Logger, { LogEntry } from "@/(components)/Logger";
 
 export default function PubSubClient() {
   const client = new Ably.Realtime.Promise({
@@ -62,7 +62,7 @@ function PubSubMessages() {
   const publicFromServerHandler: MouseEventHandler = (
     _event: MouseEvent<HTMLButtonElement>,
   ) => {
-    fetch("/publish", {
+    fetch("/api/publish", {
       method: "POST",
       headers: {
         "content-type": "application/json",
