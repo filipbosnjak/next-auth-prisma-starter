@@ -21,12 +21,15 @@ export const credentialsProvider = CredentialsProvider({
 
       if (foundUser) {
         // compare the password from the form with the stored password
+        console.log(credentials?.password, foundUser?.password);
         const passwordsMatch = await bcrypt.compare(
           credentials?.password || "",
           foundUser?.password || "",
         );
+        console.log("passwordsMatch: ", passwordsMatch);
         if (!passwordsMatch) {
-          return { error: "Incorrect password" };
+          console.log("passwords don't match");
+          return null;
         }
         return {
           email: foundUser.email,

@@ -4,10 +4,7 @@
  */
 import React from "react";
 import dynamic from "next/dynamic";
-import { getServerSession } from "next-auth";
-import { options } from "@/app/api/auth/[...nextauth]/options";
-import { redirect } from "next/navigation";
-import { authUser } from "@/(components)/comp";
+import { authUser } from "@/(components)/utils/ServerUtils";
 
 const PubSubClient = dynamic(() => import("./pubsub-client"), {
   ssr: false,

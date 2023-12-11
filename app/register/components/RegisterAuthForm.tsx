@@ -19,6 +19,7 @@ import {
   SuccessfulRegistrationToast,
 } from "@/(components)/ToastUtils";
 import SingInWithGithubButton from "@/(components)/client-components/SingInWithGithubButton";
+import { RegisterResponse } from "@/app/api/register/route";
 
 export type RegisterInput = {
   email: string;
@@ -60,10 +61,12 @@ export function RegisterAuthForm({
       },
       body: JSON.stringify(data),
     }).then(async (r) => {
+      console.log(r.status);
       if (r.status === 200) {
         SuccessfulRegistrationToast(router, data);
       } else {
-        SomethingWentWrongToast();
+        const res = (await r.json()) as RegisterResponse;
+        SomethingWentWrongToast(res.message);
       }
     });
   };

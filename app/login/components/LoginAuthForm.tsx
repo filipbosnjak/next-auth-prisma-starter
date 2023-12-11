@@ -15,6 +15,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { RegisterInput } from "@/app/register/components/RegisterAuthForm";
 import SingInWithGithubButton from "@/(components)/client-components/SingInWithGithubButton";
 import SingInWithGoogleButton from "@/(components)/client-components/SingInWithGoogleButton";
+import { SomethingWentWrongToast } from "@/(components)/ToastUtils";
+import { redirect, useRouter } from "next/navigation";
 
 export type LoginInput = {
   email: string;
@@ -30,6 +32,7 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
 export function LoginAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -39,14 +42,23 @@ export function LoginAuthForm({ className, ...props }: UserAuthFormProps) {
   } = useForm<RegisterInput>();
 
   const login: SubmitHandler<RegisterInput> = async (data: LoginInput) => {
-    signIn("credentials", {
-      callbackUrl: "/",
+    let res = await signIn("credentials", {
+      redirect: false,
       email: data.email,
       password: data.password,
-    }).then((r) => {
-      debugger;
-      console.log(r);
     });
+    console.log(res);
+    switch (res?.status) {
+      case 200:
+        router.push("/");
+        break;
+      case 401:
+        SomethingWentWrongToast("Invalid credentials");
+        break;
+      default:
+        SomethingWentWrongToast("Error logging in");
+        break;
+    }
   };
 
   return (

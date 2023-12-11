@@ -15,8 +15,8 @@ export const authUser = async () => {
   return session;
 };
 
-const Comp = (props: CompProps) => {
+const ServerUtils = (props: CompProps) => {
   return <></>;
 };
 
-export default Comp;
+export default ServerUtils;

@@ -19,9 +19,15 @@ export async function POST(
     },
   });
   if (foundUser) {
-    return Response.json({
-      message: "User already exists",
-    });
+    console.log(`User already exists: ${foundUser.email}`);
+    return Response.json(
+      {
+        message: "User already exists",
+      },
+      {
+        status: 400,
+      },
+    );
   } else {
     const hashedPassword = await bcrypt.hash(userInput.password, 10);
 
@@ -33,8 +39,14 @@ export async function POST(
         role: "USER",
       },
     });
-    return Response.json({
-      message: "User created",
-    });
+    console.log("user created");
+    return Response.json(
+      {
+        message: "User created",
+      },
+      {
+        status: 200,
+      },
+    );
   }
 }

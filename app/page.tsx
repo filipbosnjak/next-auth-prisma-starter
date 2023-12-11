@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import TestButton from "@/(components)/TestButton";
-import { authUser } from "@/(components)/comp";
+import { authUser } from "@/(components)/utils/ServerUtils";
 
 export default async function Home() {
   await authUser();

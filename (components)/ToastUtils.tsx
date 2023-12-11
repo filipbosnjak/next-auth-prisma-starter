@@ -36,11 +36,11 @@ export const SuccessfulRegistrationToast = (
   });
 };
 
-export const SomethingWentWrongToast = () => {
+export const SomethingWentWrongToast = (message: String) => {
   toast({
     variant: "destructive",
     title: "Uh oh! Something went wrong.",
-    description: "There was a problem with your request.",
+    description: `There was a problem with your request: ${message}`,
     action: <ToastAction altText="Try again">Try again</ToastAction>,
   });
 };

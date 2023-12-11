@@ -1,5 +1,5 @@
 import React from "react";
-import { authUser } from "@/(components)/comp";
+import { authUser } from "@/(components)/utils/ServerUtils";
 
 export type PageProps = {};
 
