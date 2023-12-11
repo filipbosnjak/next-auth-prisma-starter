@@ -8,7 +8,7 @@ import Logger, { LogEntry } from "@/(components)/logger";
 export type AblyAuthClientComponentProps = {};
 
 const client = new Ably.Realtime.Promise({
-  authUrl: "/api/ably",
+  authUrl: "/ably",
   authMethod: "GET",
 });
 

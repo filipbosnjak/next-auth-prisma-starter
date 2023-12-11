@@ -7,7 +7,7 @@ import Logger, { LogEntry } from "@/(components)/logger";
 
 export default function PubSubClient() {
   const client = new Ably.Realtime.Promise({
-    authUrl: "/api/ably",
+    authUrl: "/ably",
     authMethod: "GET",
   });
 
@@ -62,7 +62,7 @@ function PubSubMessages() {
   const publicFromServerHandler: MouseEventHandler = (
     _event: MouseEvent<HTMLButtonElement>,
   ) => {
-    fetch("/api/publish", {
+    fetch("/publish", {
       method: "POST",
       headers: {
         "content-type": "application/json",
