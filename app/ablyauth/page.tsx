@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import dynamic from "next/dynamic";
+import { authUser } from "@/(components)/comp";
 
 export type PageProps = {};
 
@@ -14,11 +15,7 @@ const AblyAuthClientComponent = dynamic(
 );
 
 const Page = async (props: PageProps) => {
-  const session = await getServerSession(options);
-
-  if (!session) {
-    redirect("/api/auth/signin?callbackUrl=/hello");
-  }
+  await authUser();
   return (
     <>
       ablyauth

@@ -2,16 +2,12 @@ import React from "react";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { options } from "../api/auth/[...nextauth]/options";
+import { authUser } from "@/(components)/comp";
 
 export type PageProps = {};
 
 const Page = async (props: PageProps) => {
-  const session = await getServerSession(options);
-
-  if (!session) {
-    redirect("/api/auth/signin?callbackUrl=/hello");
-  }
-
+  await authUser();
   // @ts-ignore
   return <>hello {session.user.name}</>;
 };

@@ -7,6 +7,7 @@ import dynamic from "next/dynamic";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
+import { authUser } from "@/(components)/comp";
 
 const PubSubClient = dynamic(() => import("./pubsub-client"), {
   ssr: false,
@@ -14,11 +15,7 @@ const PubSubClient = dynamic(() => import("./pubsub-client"), {
 
 const PubSub = async () => {
   const pageId = "PubSubChannels";
-  const session = await getServerSession(options);
-
-  if (!session) {
-    redirect("/api/auth/signin?callbackUrl=/hello");
-  }
+  await authUser();
 
   return (
     <>

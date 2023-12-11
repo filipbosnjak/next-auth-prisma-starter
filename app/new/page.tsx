@@ -1,13 +1,11 @@
-import React from 'react';
+import React from "react";
+import { authUser } from "@/(components)/comp";
 
-export type PageProps = {
-}
+export type PageProps = {};
 
-const Page = (props: PageProps) => {
- return (
-    <>
-    asdf
-    </>
- );}
+const Page = async (props: PageProps) => {
+  await authUser();
+  return <>asdf</>;
+};
 
 export default Page;

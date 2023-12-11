@@ -4,6 +4,9 @@ import "./globals.css";
 import AuthProvider from "@/(components)/AuthProvider";
 import GlobalNav from "@/(components)/GlobalNav";
 import { NavigationMenuDemo } from "@/(components)/NavigationMenuDemo";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
