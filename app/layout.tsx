@@ -20,16 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={inter.className}>
-          <div
-            className={
-              "preview flex min-h-[350px] w-full justify-center p-10 items-center"
-            }
-          >
-            <NavigationMenuDemo />
-          </div>
-          {children}
-        </body>
+        <body className={inter.className}>{children}</body>
       </AuthProvider>
     </html>
   );
