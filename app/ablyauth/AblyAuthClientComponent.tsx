@@ -9,7 +9,7 @@ export type AblyAuthClientComponentProps = {};
 
 const client = new Ably.Realtime.Promise({
   authUrl: "/ably",
-  authMethod: "GET",
+  authMethod: "POST",
   queryTime: true,
 });
 
