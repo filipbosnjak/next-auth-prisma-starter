@@ -6,6 +6,10 @@ const nextConfig = {
   reactStrictMode: false,
   images: {
     dangerouslyAllowSVG: true,
+
+    // Fix ably errors: sqrt undefined
+    swcMinify: false,
+
     domains: [
       "static.ably.dev",
       "avatars.githubusercontent.com",
