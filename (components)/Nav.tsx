@@ -31,7 +31,7 @@ const Nav = async () => {
         />
         <div className="flex gap-30">
           {session ? (
-            <SignOutButton />
+            <></>
           ) : (
             <>
               <Link href="/api/auth/signin">Login</Link>
@@ -39,8 +39,6 @@ const Nav = async () => {
             </>
           )}
         </div>
-        <Link href={"/ablyauth"}>ablyauth</Link>
-        <Link href={"/pubsub"}>pubsub</Link>
       </nav>
     </header>
   );

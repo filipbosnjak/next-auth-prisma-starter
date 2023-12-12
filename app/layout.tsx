@@ -3,11 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "@/(components)/AuthProvider";
 import { Toaster } from "@/components/ui/toaster";
-import { NavTwo } from "@/(components)/NavTwo";
-import { authUser } from "@/(components)/utils/ServerUtils";
 import { ServerSession } from "@/app/messages/page";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/api/auth/[...nextauth]/options";
+import NavBar from "@/(components)/navbar/NavBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,15 +20,11 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session: ServerSession = (await getServerSession(
-    options,
-  )) as ServerSession;
-
   return (
     <html lang="en">
       <AuthProvider>
         <body className={inter.className}>
-          {session && <NavTwo currentUser={session?.user?.email} />}
+          <NavBar />
           {children}
         </body>
         <Toaster />

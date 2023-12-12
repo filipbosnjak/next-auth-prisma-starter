@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { RegisterAuthForm } from "@/app/register/components/RegisterAuthForm";
 import { getProviders } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -13,7 +16,10 @@ export const metadata: Metadata = {
 
 export default async function AuthenticationPage() {
   const providers = await getProviders();
-
+  const session = await getServerSession(options);
+  if (session) {
+    redirect("/");
+  }
   return (
     <>
       <div className="container relative h-screen  flex-col items-center justify-center grid lg:max-w-none lg:px-0">

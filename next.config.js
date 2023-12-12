@@ -4,7 +4,6 @@ const nextConfig = {
   // useEffect with no dependencies to ensure the function
   // is only run once and only run on the client.
   reactStrictMode: false,
-  swcMinify: false,
   images: {
     dangerouslyAllowSVG: true,
     domains: [

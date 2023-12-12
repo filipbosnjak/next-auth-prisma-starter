@@ -6,6 +6,9 @@ import { buttonVariants } from "@/components/ui/button";
 import { LoginAuthForm } from "@/app/login/components/LoginAuthForm";
 import { getProviders } from "next-auth/react";
 import prisma from "@/prisma/prisma";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/api/auth/[...nextauth]/options";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -13,6 +16,10 @@ export const metadata: Metadata = {
 };
 
 export default async function AuthenticationPage() {
+  const session = await getServerSession(options);
+  if (session) {
+    redirect("/");
+  }
   return (
     <>
       <div className="container relative h-screen  flex-col items-center justify-center grid lg:max-w-none lg:px-0">
@@ -54,6 +61,7 @@ export default async function AuthenticationPage() {
           </div>
         </div>
       </div>
+      )
     </>
   );
 }
