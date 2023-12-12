@@ -17,13 +17,13 @@ export default function NavBar() {
       console.log(session);
     }
   }, [session]);
-  return <>{status === "authenticated" ? <NAV /> : <></>}</>;
+  return <div>{status === "authenticated" ? <NAV /> : <> </>}</div>;
 }
 
 const NAV = () => {
   return (
     <div>
-      <div className="hidden flex-col md:flex">
+      <div className="flex-col md:flex">
         <div className="border-b">
           <div className="flex h-16 items-center px-4">
             <TeamSwitcher />
