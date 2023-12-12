@@ -8,7 +8,7 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
 
     // Fix ably errors: sqrt undefined
-    swcMinify: false,
+    swcMinify: true,
 
     domains: [
       "static.ably.dev",
