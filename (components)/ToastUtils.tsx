@@ -36,6 +36,14 @@ export const SuccessfulRegistrationToast = (
   });
 };
 
+export const MessageSentSuccessfulyToast = () => {
+  toast({
+    title: "Message sent successfully!",
+    description: "",
+    action: <ToastAction altText="Home">OK</ToastAction>,
+  });
+};
+
 export const SomethingWentWrongToast = (message: String) => {
   toast({
     variant: "destructive",

@@ -40,7 +40,6 @@ export function RegisterAuthForm({
   ...props
 }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-  const { toast } = useToast();
   const router = useRouter();
 
   const {

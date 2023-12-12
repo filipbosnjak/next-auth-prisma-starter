@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 import { NewMessageInput } from "@/app/messages/newmessage/page";
 import { Message } from "@/app/api/send-message/route";
+import { MessageSentSuccessfulyToast } from "@/(components)/ToastUtils";
 
 export type NewMessageProps = {
   user: string;
@@ -60,6 +61,7 @@ const NewMessage = ({ user }: NewMessageProps) => {
       },
       body: JSON.stringify(message),
     });
+    MessageSentSuccessfulyToast();
   };
 
   console.log(user);
