@@ -4,12 +4,10 @@ const nextConfig = {
   // useEffect with no dependencies to ensure the function
   // is only run once and only run on the client.
   reactStrictMode: false,
+  // Fix ably errors: sqrt undefined
+  swcMinify: false,
   images: {
     dangerouslyAllowSVG: true,
-
-    // Fix ably errors: sqrt undefined
-    swcMinify: true,
-
     domains: [
       "static.ably.dev",
       "avatars.githubusercontent.com",
