@@ -19,6 +19,9 @@ export type NewMessageProps = {
 const NewMessage = ({ user }: NewMessageProps) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  const [isMessageSending, setIsMessageSending] =
+    React.useState<boolean>(false);
+
   const client = new Ably.Realtime.Promise({
     authUrl: "/ably",
     authMethod: "POST",
@@ -54,6 +57,7 @@ const NewMessage = ({ user }: NewMessageProps) => {
       subject: subject,
       text: text,
     };
+    setIsMessageSending(true);
     await fetch("/api/send-message", {
       method: "POST",
       headers: {
@@ -62,6 +66,7 @@ const NewMessage = ({ user }: NewMessageProps) => {
       body: JSON.stringify(message),
     });
     MessageSentSuccessfulyToast();
+    setIsMessageSending(false);
   };
 
   console.log(user);
@@ -111,11 +116,11 @@ const NewMessage = ({ user }: NewMessageProps) => {
                   {...register("text", { required: true })}
                 />
               </div>
-              <Button disabled={isLoading}>
+              <Button disabled={isLoading || isMessageSending}>
                 {isLoading && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                Send message
+                {isMessageSending ? "Sending..." : "Send message"}
               </Button>
             </div>
           </form>
