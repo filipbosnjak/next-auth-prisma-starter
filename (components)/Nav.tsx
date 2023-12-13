@@ -16,7 +16,6 @@ export type Session = {
 const Nav = async () => {
   const session = (await getServerSession(options)) as Session;
 
-  console.log(session);
   return (
     <header className="bg-gray-600 text-gray-100">
       <nav className="flex justify-between items-center w-full px-10 py-4">

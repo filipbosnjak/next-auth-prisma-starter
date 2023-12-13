@@ -52,7 +52,6 @@ function PubSubMessages() {
   const publicFromClientHandler: MouseEventHandler = (
     _event: MouseEvent<HTMLButtonElement>,
   ) => {
-    console.log("publishing from client");
     if (channel === null) return;
     channel.publish("update-from-client", {
       text: `${messageText} @ ${new Date().toISOString()}`,

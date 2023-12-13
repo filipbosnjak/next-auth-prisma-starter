@@ -11,8 +11,6 @@ export const googleProvider = GoogleProvider({
 
     // Here we get data from Google and we can do whatever we want with it
 
-    console.log(profile);
-
     const foundUser = await prisma.user.findUnique({
       where: {
         email: profile?.email || "",

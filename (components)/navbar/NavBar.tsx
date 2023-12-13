@@ -11,10 +11,8 @@ export default function NavBar() {
   const [status, setStatus] = useState("unauthenticated");
   const session = useSession();
   useEffect(() => {
-    console.log(session.status);
     if (session.status === "authenticated") {
       setStatus("authenticated");
-      console.log(session);
     }
   }, [session]);
   return <div>{status === "authenticated" ? <NAV /> : <> </>}</div>;

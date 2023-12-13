@@ -23,9 +23,7 @@ export const SuccessfulRegistrationToast = (
             callbackUrl: "/",
             email: data.email,
             password: data.password,
-          }).then((r) => {
-            console.log(r);
-          });
+          }).then((r) => {});
           router.push("/");
         }}
         altText="Home"

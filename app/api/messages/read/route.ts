@@ -21,7 +21,6 @@ export async function POST(
     },
   });
 
-  console.log(id);
   return Response.json({
     message: "User created",
   });

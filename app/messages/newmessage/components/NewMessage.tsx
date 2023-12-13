@@ -11,6 +11,7 @@ import { Icons } from "@/components/icons";
 import { NewMessageInput } from "@/app/messages/newmessage/page";
 import { Message } from "@/app/api/send-message/route";
 import { MessageSentSuccessfulyToast } from "@/(components)/ToastUtils";
+import { DBMessage } from "@/app/api/get-messages/route";
 
 export type NewMessageProps = {
   user: string;
@@ -46,9 +47,17 @@ const NewMessage = ({ user }: NewMessageProps) => {
     subject,
   }: NewMessageInput) => {
     console.log(`Sending message to ${receiver}`);
-    console.log(receiver, text, subject);
+    const newMessage: DBMessage = {
+      id: "",
+      fromId: "",
+      toId: "",
+      subject: subject,
+      text: text,
+      createdAt: new Date(),
+      isRead: false,
+    };
     await newMessageChannel.channel.publish("new-message", {
-      text: `${subject} - ${text} @ ${new Date().toISOString()} FROM ${user}`,
+      text: JSON.stringify(newMessage),
     });
 
     const message: Message = {
@@ -68,9 +77,6 @@ const NewMessage = ({ user }: NewMessageProps) => {
     MessageSentSuccessfulyToast();
     setIsMessageSending(false);
   };
-
-  console.log(user);
-
   return (
     <>
       <AblyProvider client={client}>

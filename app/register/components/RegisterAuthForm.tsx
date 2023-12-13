@@ -60,7 +60,6 @@ export function RegisterAuthForm({
       },
       body: JSON.stringify(data),
     }).then(async (r) => {
-      console.log(r.status);
       if (r.status === 200) {
         SuccessfulRegistrationToast(router, data);
       } else {
