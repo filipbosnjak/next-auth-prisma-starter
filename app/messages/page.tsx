@@ -19,6 +19,7 @@ const Messages = dynamic(() => import("./components/Messages"), {
 const Page = async (props: PageProps) => {
   await authUser();
   const session: ServerSession = (await authUser()) as ServerSession;
+  console.log("messages from the server refreshed");
 
   const messages: DBMessage[] = await prisma.message.findMany({
     where: {

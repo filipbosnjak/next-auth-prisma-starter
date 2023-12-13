@@ -22,6 +22,6 @@ export async function POST(
   });
 
   return Response.json({
-    message: "User created",
+    message: "Message read",
   });
 }

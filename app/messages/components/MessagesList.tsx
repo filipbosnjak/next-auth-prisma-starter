@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useTransition } from "react";
 import { useChannel } from "ably/react";
 import * as Ably from "ably";
 import {
@@ -24,12 +24,14 @@ import { Button } from "@/components/ui/button";
 import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import { MdDelete, MdForwardToInbox } from "react-icons/md";
 import { DBMessage } from "@/app/api/get-messages/route";
+import { useRouter } from "next/navigation";
 
 export type MessagesListProps = {
   user: string;
   messages: DBMessage[];
   setCurrentMessage: React.Dispatch<React.SetStateAction<DBMessage>>;
   setSingleMessageView: React.Dispatch<React.SetStateAction<boolean>>;
+  refresh: () => void;
 };
 
 const MessagesList = ({
@@ -37,7 +39,11 @@ const MessagesList = ({
   messages,
   setCurrentMessage,
   setSingleMessageView,
+  refresh,
 }: MessagesListProps) => {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   const [clientMessages, setClientMessages] =
     React.useState<DBMessage[]>(messages);
   // message.data will be stringified JSON of the DBmessage object
@@ -47,6 +53,10 @@ const MessagesList = ({
     setClientMessages((prev) => [...prev, newMessage]);
     console.log("state updated");
   });
+
+  useEffect(() => {
+    setClientMessages(messages);
+  }, [messages]);
   const handleMessageClicked = async (message: DBMessage) => {
     console.log("message: ", message);
     setCurrentMessage(message);
@@ -119,7 +129,11 @@ const MessagesList = ({
 
                     <DropdownMenuItem
                       onClick={(event) => {
-                        console.log("delete");
+                        fetch("/api/message", {
+                          method: "DELETE",
+                          body: JSON.stringify({ id: message.id }),
+                        }).then(() => router.refresh());
+                        refresh();
                         event.stopPropagation();
                       }}
                     >

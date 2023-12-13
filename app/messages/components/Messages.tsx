@@ -6,6 +6,7 @@ import * as Ably from "ably";
 import MessagesList from "@/app/messages/components/MessagesList";
 import { DBMessage } from "@/app/api/get-messages/route";
 import SingleMessageView from "@/app/messages/components/SingleMessageView";
+import { useRouter } from "next/navigation";
 
 export type MessagesProps = {
   user: string;
@@ -28,6 +29,12 @@ const client = new Ably.Realtime.Promise({
 });
 
 const Messages = ({ user, messages }: MessagesProps) => {
+  const router = useRouter();
+
+  const refresh = () => {
+    router.refresh();
+  };
+
   const [singleMessageView, setSingleMessageView] =
     React.useState<boolean>(false);
 
@@ -51,6 +58,7 @@ const Messages = ({ user, messages }: MessagesProps) => {
               messages={messages}
               setSingleMessageView={setSingleMessageView}
               setCurrentMessage={setCurrentMessage}
+              refresh={refresh}
             />
           </div>
         )}
