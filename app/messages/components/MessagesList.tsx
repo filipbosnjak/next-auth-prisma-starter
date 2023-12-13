@@ -77,7 +77,7 @@ const MessagesList = ({
           <TableRow>
             <TableHead className="w-[100px]">Subject</TableHead>
             <TableHead>Text</TableHead>
-            <TableHead>From ID</TableHead>
+            <TableHead>From</TableHead>
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -100,7 +100,7 @@ const MessagesList = ({
                   : message.text?.substring(0, 20).concat("...")}
               </TableCell>
               <TableCell className={message.isRead ? "" : "font-bold"}>
-                {message.fromId}
+                {message.from?.email}
               </TableCell>
               <TableCell>
                 <DropdownMenu>

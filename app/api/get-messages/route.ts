@@ -1,5 +1,6 @@
 import prisma from "@/prisma/prisma";
 import { NextResponse } from "next/server";
+import { User } from "@prisma/client";
 
 export type GetMessagesRequest = {
   email: string;
@@ -13,6 +14,7 @@ export type DBMessage = {
   toId: string | null;
   isRead: boolean;
   createdAt: Date;
+  from: { email: string | null } | null;
 };
 
 export async function POST(req: Request, res: NextResponse<DBMessage[]>) {

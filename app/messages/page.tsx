@@ -27,7 +27,16 @@ const Page = async (props: PageProps) => {
         email: session.user.email,
       },
     },
+    include: {
+      from: {
+        select: {
+          email: true,
+        },
+      },
+    },
   });
+
+  console.log("messages: ", messages);
 
   return (
     <>

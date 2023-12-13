@@ -21,6 +21,9 @@ export const defaultMessage: DBMessage = {
   text: "",
   createdAt: new Date(),
   isRead: false,
+  from: {
+    email: "",
+  },
 };
 
 const client = new Ably.Realtime.Promise({
