@@ -55,6 +55,9 @@ const NewMessage = ({ user }: NewMessageProps) => {
       text: text,
       createdAt: new Date(),
       isRead: false,
+      from: {
+        email: "",
+      },
     };
     await newMessageChannel.channel.publish("new-message", {
       text: JSON.stringify(newMessage),
