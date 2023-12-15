@@ -13,40 +13,25 @@ export function MainNav({
       className={cn("flex items-center space-x-4 lg:space-x-6", className)}
       {...props}
     >
-      <Link
-        href="/"
-        className="text-sm font-medium transition-colors hover:text-primary"
-      >
+      <Link href="/" className="text-sm font-medium">
         Home
       </Link>
-      <Link
-        href="/messages"
-        className="text-sm font-medium transition-colors hover:text-primary"
-      >
+      <Link href="/messages" className="text-sm font-medium">
         Messages
       </Link>
       <Link
         href="/dashboard"
-        className="text-sm font-medium transition-colors hover:text-primary"
+        className="text-sm font-medium dark:text-gray-300"
       >
         Overview
       </Link>
-      <Link
-        href="/ablyauth"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
+      <Link href="/ablyauth" className="text-sm font-medium ">
         AblyAuth
       </Link>
-      <Link
-        href="/pubsub"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
+      <Link href="/pubsub" className="text-sm font-medium">
         PubSub
       </Link>
-      <Link
-        href="/settings"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
+      <Link href="/settings" className="text-sm font-medium">
         Settings
       </Link>
     </nav>

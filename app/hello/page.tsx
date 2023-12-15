@@ -7,9 +7,9 @@ import { authUser } from "@/(components)/utils/ServerUtils";
 export type PageProps = {};
 
 const Page = async (props: PageProps) => {
-  await authUser();
+  const session = await authUser();
   // @ts-ignore
-  return <>hello {session.user.name}</>;
+  return <>hello {session?.user?.name}</>;
 };
 
 export default Page;

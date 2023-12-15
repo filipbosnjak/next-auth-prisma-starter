@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProvider from "@/(components)/AuthProvider";
 import { Toaster } from "@/components/ui/toaster";
 import NavBar from "@/(components)/navbar/NavBar";
+import { ThemeProvider } from "@/(components)/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,12 +19,19 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <AuthProvider>
         <body className={inter.className}>
-          <NavBar />
-          {children}
-          <Toaster />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NavBar />
+            {children}
+            <Toaster />
+          </ThemeProvider>
         </body>
       </AuthProvider>
     </html>

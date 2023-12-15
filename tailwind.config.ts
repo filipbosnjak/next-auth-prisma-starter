@@ -17,6 +17,9 @@ const config: Config = {
       },
     },
     extend: {
+      textColor: {
+        dark: "red",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
